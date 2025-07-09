@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing dependencies...
+      - npm install
+  
+  pre_build:
+    commands:
+      - echo Pre-build phase started on `date`
+      - echo Running tests...
+      - npm run lint || true
+  
+  build:
+    commands:
+      - echo Build phase started on `date`
+      - echo Building the application...
+      - npm run build
+      - echo Build completed on `date`
+  
+  post_build:
+    commands:
+      - echo Post-build phase started on `date`
+      - echo Preparing deployment artifacts...
+      - ls -la dist/
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist
+  name: url-shortener-app-$(date +%Y-%m-%d-%H-%M-%S)
+
+cache:
+  paths:
+    - node_modules/**/*
+    - ~/.npm/**/*
