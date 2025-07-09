@@ -3,29 +3,32 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 22
     commands:
-      - echo Installing dependencies...
-      - npm install
-  
+      - echo "Entered the install phase..."
+      - npm install -g pnpm
+      - pnpm install
+    finally:
+      - echo "Install phase completed."
   pre_build:
     commands:
-      - echo Pre-build phase started on `date`
-      - echo Running tests...
-      - npm run lint || true
-  
+      - echo "Entered the pre_build phase..."
+      # - pnpm run lint || true
+    finally:
+      - echo "Pre_build phase completed."
   build:
     commands:
-      - echo Build phase started on `date`
-      - echo Building the application...
-      - npm run build
-      - echo Build completed on `date`
-  
+      - echo "Entered the build phase..."
+      - pnpm run build
+      - echo "Build completed on $(date)"
+    finally:
+      - echo "Build phase completed."
   post_build:
     commands:
-      - echo Post-build phase started on `date`
-      - echo Preparing deployment artifacts...
+      - echo "Entered the post_build phase..."
       - ls -la dist/
+    finally:
+      - echo "Post_build phase completed."
 
 artifacts:
   files:
@@ -37,3 +40,4 @@ cache:
   paths:
     - node_modules/**/*
     - ~/.npm/**/*
+    - ~/.pnpm-store/**/*
