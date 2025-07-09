@@ -30,9 +30,9 @@ phases:
   post_build:
     commands:
       - echo "Entered the post_build phase..."
-      - echo "Syncing dist/ to S3 bucket: $S3_BUCKET_NAME"
+      - echo "Syncing dist/ to S3 bucket - $S3_BUCKET_NAME"
       - aws s3 sync dist/ s3://$S3_BUCKET_NAME/ --delete
-      - echo "Invalidating CloudFront cache for distribution: $CLOUDFRONT_DISTRIBUTION_ID"
+      - echo "Invalidating CloudFront cache for distribution - $CLOUDFRONT_DISTRIBUTION_ID"
       - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
     finally:
       - echo "Post_build phase completed."
