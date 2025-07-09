@@ -7,13 +7,12 @@ phases:
     commands:
       - echo "Entered the install phase..."
       - npm install -g pnpm
-      - pnpm install
     finally:
       - echo "Install phase completed."
   pre_build:
     commands:
       - echo "Entered the pre_build phase..."
-      # - pnpm run lint || true
+      - pnpm install
     finally:
       - echo "Pre_build phase completed."
   build:
