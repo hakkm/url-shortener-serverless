@@ -10,8 +10,6 @@ export function initializeThemeToggle() {
 
     // const initialTheme = savedTheme || 'light';
 
-    console.log('Saved theme:', savedTheme);
-    console.log('Initial theme:', initialTheme);
     // Apply initial theme
     if (initialTheme === 'dark') {
         html.classList.add('dark');
